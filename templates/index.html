@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stroke Prediction</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            margin: auto;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+        .form-label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+            color: #333;
+        }
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        .form-select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            background-color: #fff;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+        .form-select:focus, .form-control:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+        .form-text {
+            font-size: 0.875em;
+            color: #6c757d;
+        }
+        .btn-primary {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 1em;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            background-color: #e9ecef;
+            color: #495057;
+            text-align: center;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Stroke Prediction Form</h2>
+    <form action="/predict" method="post">
+        
+        <label for="gender" class="form-label">Gender</label>
+        <select class="form-select" name="gender" required>
+            <option value="0">Female</option>
+            <option value="1">Male</option>
+        </select>
+
+        <label for="age" class="form-label">Age</label>
+        <input type="number" class="form-control" name="age" step="any" placeholder="Enter your age" required>
+        <small class="form-text">Age in years (e.g., 25.5).</small>
+
+        <label for="hypertension" class="form-label">Hypertension</label>
+        <select class="form-select" name="hypertension" required>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <small class="form-text">0: No Hypertension, 1: Has Hypertension.</small>
+
+        <label for="heart_disease" class="form-label">Heart Disease</label>
+        <select class="form-select" name="heart_disease" required>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <small class="form-text">0: No Heart Disease, 1: Has Heart Disease.</small>
+
+        <label for="ever_married" class="form-label">Ever Married</label>
+        <select class="form-select" name="ever_married" required>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <small class="form-text">0: Never Married, 1: Married or Previously Married.</small>
+
+        <label for="work_type" class="form-label">Work Type</label>
+        <select class="form-select" name="work_type" required>
+            <option value="0">Children</option>
+            <option value="1">Government Job</option>
+            <option value="2">Never Worked</option>
+            <option value="3">Private Job</option>
+            <option value="4">Self-employed</option>
+        </select>
+        <small class="form-text">Select your work category.</small>
+
+        <label for="Residence_type" class="form-label">Residence Type</label>
+        <select class="form-select" name="Residence_type" required>
+            <option value="0">Urban</option>
+            <option value="1">Rural</option>
+        </select>
+        <small class="form-text">0: Urban, 1: Rural.</small>
+
+        <label for="avg_glucose_level" class="form-label">Average Glucose Level</label>
+        <input type="number" class="form-control" name="avg_glucose_level" step="any" placeholder="Enter average glucose level" required>
+        <small class="form-text">Average glucose level in the blood (mg/dL).</small>
+
+        <label for="bmi" class="form-label">Body Mass Index (BMI)</label>
+        <input type="number" class="form-control" name="bmi" step="any" placeholder="Enter your BMI" required>
+        <small class="form-text">BMI value (e.g., 22.5).</small>
+
+        <label for="smoking_status" class="form-label">Smoking Status</label>
+        <select class="form-select" name="smoking_status" required>
+            <option value="0">Never Smoked</option>
+            <option value="1">Former Smoker</option>
+            <option value="2">Currently Smokes</option>
+        </select>
+        <small class="form-text">Your current smoking status.</small>
+
+        <button type="submit" class="btn-primary">Predict</button>
+    </form>
+
+    <!-- Display the prediction result here -->
+    {% if prediction_text %}
+    <div class="result">
+        {{ prediction_text }}
+    </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
